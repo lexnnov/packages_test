@@ -30,29 +30,29 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async getPackages (commit, state) {
+    async getPackages (context, state) {
       if (state) {
         try {
-          commit.commit('setSpinnerState', true)
+          context.commit('setSpinnerState', true)
           const packages = await PostsService.get(state)
-          commit.commit('setPackages', packages.data)
-          commit.commit('setSpinnerState', false)
+          context.commit('setPackages', packages.data)
+          context.commit('setSpinnerState', false)
         } catch (e) {
-          commit.commit('setErrorState', { state: true, message: e })
-          commit.commit('setSpinnerState', false)
+          context.commit('setErrorState', { state: true, message: e })
+          context.commit('setSpinnerState', false)
         }
       } else {
-        commit.commit('setPackages', [])
+        context.commit('setPackages', [])
       }
     },
-    setSpinnerState (commit, payload) {
-      commit.commit('setSpinnerState', payload)
+    setSpinnerState (context, payload) {
+      context.commit('setSpinnerState', payload)
     },
-    setErrorState (commit, payload) {
-      commit.commit('setErrorState', payload)
+    setErrorState (context, payload) {
+      context.commit('setErrorState', payload)
     },
-    setDialogState (commit, payload) {
-      commit.commit('setDialogState', payload)
+    setDialogState (context, payload) {
+      context.commit('setDialogState', payload)
     }
   }
 })
