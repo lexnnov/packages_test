@@ -32,6 +32,7 @@
 import Input from '../components/Input.vue'
 import Table from '../components/Table'
 import 'promise-polyfill/src/polyfill'
+import { FETCH_PACKAGES, SET_DIALOG_STATE, SET_PACKAGE_INFO } from '../constants/constants'
 
 export default {
   name: 'Home',
@@ -61,8 +62,8 @@ export default {
   },
   methods: {
     getRowInfo (packageInfo) {
-      this.$store.commit('setPackagesInfo', packageInfo)
-      this.$store.dispatch('setDialogState', true)
+      this.$store.dispatch(SET_PACKAGE_INFO, packageInfo)
+      this.$store.dispatch(SET_DIALOG_STATE, true)
     }
   },
   computed: {
@@ -75,7 +76,7 @@ export default {
   },
   watch: {
     packageName () {
-      this.$store.dispatch('getPackages', this.packageName)
+      this.$store.dispatch(FETCH_PACKAGES, this.packageName)
     }
   }
 }

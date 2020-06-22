@@ -11,7 +11,6 @@
 export default {
   name: 'Input',
   props: {
-    getPackages: { type: Function },
     value: { type: String }
   },
   computed: {

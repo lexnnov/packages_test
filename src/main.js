@@ -11,6 +11,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios)
+console.log(store)
 
 Vue.config.productionTip = false
 

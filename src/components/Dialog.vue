@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import { SET_DIALOG_STATE } from '../constants/constants'
+
 export default {
   name: 'Dialog',
   computed: {
@@ -65,7 +67,7 @@ export default {
   },
   methods: {
     closeDialog () {
-      this.$store.dispatch('setDialogState', false)
+      this.$store.dispatch(SET_DIALOG_STATE, false)
     },
     addHref (prop, value) {
       return (prop === 'homepage' || prop === 'github') ? `<a target="_blank" href=${value}>${value}</a>` : value

@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import { SET_ERROR_STATE } from '../constants/constants'
+
 export default {
   name: 'Snackbar',
   data: () => ({
@@ -31,7 +33,7 @@ export default {
   },
   methods: {
     closeSnackbar () {
-      this.$store.dispatch('setErrorState', { message: '', state: false })
+      this.$store.dispatch(SET_ERROR_STATE, { message: '', state: false })
     }
   }
 }

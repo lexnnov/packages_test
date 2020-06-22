@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import PostsService from '../services/packagesService'
+import { FETCH_PACKAGES, SET_SPINNER_STATE, SET_ERROR_STATE, SET_DIALOG_STATE, SET_PACKAGE_INFO, SET_PACKAGES } from '../constants/constants'
 
 Vue.use(Vuex)
 
@@ -13,46 +14,49 @@ export default new Vuex.Store({
     isLoading: false
   },
   mutations: {
-    setPackages (state, payload) {
+    [SET_PACKAGES] (state, payload) {
       state.packages = payload
     },
-    setPackagesInfo (state, payload) {
+    [SET_PACKAGE_INFO] (state, payload) {
       state.packageInfo = payload
     },
-    setDialogState (state, payload) {
+    [SET_DIALOG_STATE] (state, payload) {
       state.dialogIsActive = payload
     },
-    setErrorState (state, payload) {
+    [SET_ERROR_STATE] (state, payload) {
       state.error = payload
     },
-    setSpinnerState (state, payload) {
+    [SET_SPINNER_STATE] (state, payload) {
       state.isLoading = payload
     }
   },
   actions: {
-    async getPackages (context, state) {
+    async [FETCH_PACKAGES] (context, state) {
       if (state) {
         try {
-          context.commit('setSpinnerState', true)
+          context.commit(SET_SPINNER_STATE, true)
           const packages = await PostsService.get(state)
-          context.commit('setPackages', packages.data)
-          context.commit('setSpinnerState', false)
+          context.commit(SET_PACKAGES, packages.data)
+          context.commit(SET_SPINNER_STATE, false)
         } catch (e) {
-          context.commit('setErrorState', { state: true, message: e })
-          context.commit('setSpinnerState', false)
+          context.commit(SET_ERROR_STATE, { state: true, message: e })
+          context.commit(SET_SPINNER_STATE, false)
         }
       } else {
-        context.commit('setPackages', [])
+        context.commit(SET_PACKAGES, [])
       }
     },
-    setSpinnerState (context, payload) {
-      context.commit('setSpinnerState', payload)
+    [SET_PACKAGE_INFO] (context, payload) {
+      context.commit(SET_PACKAGE_INFO, payload)
     },
-    setErrorState (context, payload) {
-      context.commit('setErrorState', payload)
+    [SET_SPINNER_STATE] (context, payload) {
+      context.commit(SET_SPINNER_STATE, payload)
     },
-    setDialogState (context, payload) {
-      context.commit('setDialogState', payload)
+    [SET_ERROR_STATE] (context, payload) {
+      context.commit(SET_ERROR_STATE, payload)
+    },
+    [SET_DIALOG_STATE] (context, payload) {
+      context.commit(SET_DIALOG_STATE, payload)
     }
   }
 })
