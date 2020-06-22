@@ -1,12 +1,33 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <Navigate/>
+
+    <v-main>
+      <router-view/>
+    </v-main>
+
+    <Dialog/>
+    <Snackbar/>
+    <Footer/>
+  </v-app>
 </template>
+
+<script>
+import Dialog from './components/Dialog.vue'
+import Footer from './layouts/Footer.vue'
+import Snackbar from './components/Snackbar'
+import Navigate from './layouts/Navigate'
+
+export default {
+  name: 'app',
+  components: {
+    Navigate,
+    Snackbar,
+    Dialog,
+    Footer
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
